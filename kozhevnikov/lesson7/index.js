@@ -47,7 +47,7 @@ async function start() {
       }
     )
     app.listen(PORT, () => {
-      console.log('Server has been started...')
+      console.log('Server has been started http://localhost:3000')
     })
   } catch (e) {
     console.log(e)

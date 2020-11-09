@@ -5,8 +5,29 @@ const exphbs = require('express-handlebars')
 const taskRoutes = require('./routes/tasks')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
+const http = require('http')
+const socketIO = require('socket.io')
+const cors = require('cors')
+const jwt = require('jsonwebtoken')
 
 const PORT = process.env.PORT || 3000
+
+async function start() {
+  try {
+    await mongoose.connect(
+        'mongodb+srv://konstantin:1q2w3e4r@cluster0.dzss0.mongodb.net/<tasks>',
+        {
+          useNewUrlParser: true,
+          useFindAndModify: false
+        }
+    )
+    app.listen(PORT, () => {
+      console.log('Server has been started http://localhost:3000')
+    })
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 const userModel = require('./models/user')
 const passport = require('./auth')
@@ -47,7 +68,7 @@ async function start() {
       }
     )
     app.listen(PORT, () => {
-      console.log('Server has been started localhost:3000')
+      console.log('Server has been started http://localhost:3000')
     })
   } catch (e) {
     console.log(e)
